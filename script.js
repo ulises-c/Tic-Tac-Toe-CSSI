@@ -7,7 +7,7 @@ function draw() {
     ticTacToeBoard()
 }
 
-function  ticTacToeBoard() {
+function ticTacToeBoard() {
     fill("black");
     verticalLine1 = line(width * 1/3, 0, width * 1/3, height);
     verticalLine2 = line(width * 2/3, 0, width * 2/3, height);
