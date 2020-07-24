@@ -1,13 +1,13 @@
-function setup() {
+function setup(){
     createCanvas(400, 400);
 }
   
-function draw() {
+function draw(){
     background(200);
     ticTacToeBoard()
 }
 
-function ticTacToeBoard() {
+function ticTacToeBoard(){
     fill("black");
     verticalLine1 = line(width * 1/3, 0, width * 1/3, height);
     verticalLine2 = line(width * 2/3, 0, width * 2/3, height);
@@ -34,7 +34,7 @@ function mousePressed(){
 }
 
 class Cross {
-    constructor() {
+    constructor(){
         this.x = something;
         this.y = something;
         color = "red";
