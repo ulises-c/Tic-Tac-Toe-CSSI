@@ -4,7 +4,7 @@ function setup(){
   
 function draw(){
     background(200);
-    ticTacToeBoard()
+    ticTacToeBoard();
 }
 
 function ticTacToeBoard(){
