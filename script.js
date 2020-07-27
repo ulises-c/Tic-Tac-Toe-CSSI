@@ -18,70 +18,71 @@ function setup(){
 }
 
 function areaLocations(){
-    a1 = {
-        // top left
-        x: width * 1/3,
-        y: height * 1/3,
-        xCenter: width * 1/6,
-        yCenter: height * 1/6
-    };
-    a2 = {
-        // top middle
-        x: width * 2/3,
-        y: height * 1/3,
-        xCenter: width * 3/6,
-        yCenter: height * 1/6
-    };
-    a3 = {
-        // top right
-        x: width,
-        y: height * 1/3,
-        xCenter: width * 5/6,
-        yCenter: height * 1/6
-    };
-    a4 = {
-        // middle left
-        x: width * 1/3,
-        y: height * 2/3,
-        xCenter: width * 1/6,
-        yCenter: height * 3/6,
-    };
-    a5 = {
-        // center
-        x: width * 2/3,
-        y: height * 2/3,
-        xCenter: width * 3/6,
-        yCenter: height * 3/6
-    }
-    a6 = {
-        // middle right
-        x: width,
-        y: height * 2/3,
-        xCenter: width * 5/6,
-        yCenter: height * 3/6
-    };
-    a7 = {
-        // bottom left
-        x: width * 1/3,
-        y: height,
-        xCenter: width * 1/6,
-        yCenter: height * 5/6
-    };
-    a8 = {
-        // bottom middle
-        x: width * 2/3,
-        y: height,
-        xCenter: width * 3/6,
-        yCenter: height * 5/6
-    };
-    a9 = {
-        // bottom right
-        x: width,
-        y: height,
-        xCenter: width * 5/6,
-        yCenter: height * 5/6
-    };
-    area_locations_list = [a1, a2, a3, a4, a5, a6, a7, a8, a9];
+    area_locations_list = [
+        a1 = {
+            // top left
+            x: width * 1/3,
+            y: height * 1/3,
+            xCenter: width * 1/6,
+            yCenter: height * 1/6
+        },
+        a2 = {
+            // top middle
+            x: width * 2/3,
+            y: height * 1/3,
+            xCenter: width * 3/6,
+            yCenter: height * 1/6
+        },
+        a3 = {
+            // top right
+            x: width,
+            y: height * 1/3,
+            xCenter: width * 5/6,
+            yCenter: height * 1/6
+        },
+        a4 = {
+            // middle left
+            x: width * 1/3,
+            y: height * 2/3,
+            xCenter: width * 1/6,
+            yCenter: height * 3/6,
+        },
+        a5 = {
+            // center
+            x: width * 2/3,
+            y: height * 2/3,
+            xCenter: width * 3/6,
+            yCenter: height * 3/6
+        },
+        a6 = {
+            // middle right
+            x: width,
+            y: height * 2/3,
+            xCenter: width * 5/6,
+            yCenter: height * 3/6
+        },
+        a7 = {
+            // bottom left
+            x: width * 1/3,
+            y: height,
+            xCenter: width * 1/6,
+            yCenter: height * 5/6
+        },
+        a8 = {
+            // bottom middle
+            x: width * 2/3,
+            y: height,
+            xCenter: width * 3/6,
+            yCenter: height * 5/6
+        },
+        a9 = {
+            // bottom right
+            x: width,
+            y: height,
+            xCenter: width * 5/6,
+            yCenter: height * 5/6
+        }
+    ];
 }
   
 function draw(){
@@ -110,17 +111,17 @@ function ticTacToeBoard(){
 }
 
 function checkCollision() {
-    a1Collide = collidePointRect(mouseX, mouseY, 0, 0, a1.x, a1.y);
-    a2Collide = collidePointRect(mouseX, mouseY, a1.x, 0, a2.x, a2.y);
-    a3Collide = collidePointRect(mouseX, mouseY, a2.x, 0, a3.x, a3.y);
-    a4Collide = collidePointRect(mouseX, mouseY, 0, a1.y, a4.x, a4.y);
-    a5Collide = collidePointRect(mouseX, mouseY, a4.x, a2.y, a5.x, a5.y);
-    a6Collide = collidePointRect(mouseX, mouseY, a5.x, a3.y, a6.x, a6.y);
-    a7Collide = collidePointRect(mouseX, mouseY, 0, a4.y, a7.x, a7.y);
-    a8Collide = collidePointRect(mouseX, mouseY, a7.x, a5.y, a8.x, a8.y);
-    a9Collide = collidePointRect(mouseX, mouseY, a8.x, a6.y, a9.x, a9.y);
-
-    area_collide_list = [a1Collide, a2Collide, a3Collide, a4Collide, a5Collide, a6Collide, a7Collide, a8Collide, a9Collide];
+    area_collide_list = [
+    collidePointRect(mouseX, mouseY, 0, 0, a1.x, a1.y),
+    collidePointRect(mouseX, mouseY, a1.x, 0, a2.x, a2.y),
+    collidePointRect(mouseX, mouseY, a2.x, 0, a3.x, a3.y),
+    collidePointRect(mouseX, mouseY, 0, a1.y, a4.x, a4.y),
+    collidePointRect(mouseX, mouseY, a4.x, a2.y, a5.x, a5.y),
+    collidePointRect(mouseX, mouseY, a5.x, a3.y, a6.x, a6.y),
+    collidePointRect(mouseX, mouseY, 0, a4.y, a7.x, a7.y),
+    collidePointRect(mouseX, mouseY, a7.x, a5.y, a8.x, a8.y),
+    collidePointRect(mouseX, mouseY, a8.x, a6.y, a9.x, a9.y)
+    ];
 
     for(let i = 0; i < area_locations_list.length; i++){
         if(area_collide_list[i]){
@@ -131,6 +132,7 @@ function checkCollision() {
 }
 
 function mousePressed(){
+    // console.log(area_collide_list)
     for(let j = 0; j < area_collide_list.length; j++){
         if(area_collide_list[j]){
             console.log("Area", j+1, "collision: ", area_collide_list[j]);
