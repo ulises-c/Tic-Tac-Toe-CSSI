@@ -1,4 +1,4 @@
-let a1, a2, a3, a4, a5, a6, a7, a8, a9;
+let a1, a2, a3, a4, a5, a6, a7, a8, a9, area_locations_list;
 let a1Collide = false;
 let a2Collide = false;
 let a3Collide = false;
@@ -14,7 +14,7 @@ function setup(){
     areaLocations();
     test_circle = new Circle;
     test_cross = new Cross;
-    xImage = loadImage("https://i.imgur.com/a2GcPMe.png")
+    xImage = loadImage("https://i.imgur.com/a2GcPMe.png");
 }
 
 function areaLocations(){
@@ -81,6 +81,7 @@ function areaLocations(){
         xCenter: width * 5/6,
         yCenter: height * 5/6
     };
+    area_locations_list = [a1, a2, a3, a4, a5, a6, a7, a8, a9];
 }
   
 function draw(){
@@ -94,15 +95,9 @@ function draw(){
 }
 
 function drawLocations(){
-    text("1", a1.xCenter, a1.yCenter);
-    text("2", a2.xCenter, a2.yCenter);
-    text("3", a3.xCenter, a3.yCenter);
-    text("4", a4.xCenter, a4.yCenter);
-    text("5", a5.xCenter, a5.yCenter);
-    text("6", a6.xCenter, a6.yCenter);
-    text("7", a7.xCenter, a7.yCenter);
-    text("8", a8.xCenter, a8.yCenter);
-    text("9", a9.xCenter, a9.yCenter);
+    for(let i = 0; i <= area_locations_list.length; i++){
+        text(i, area_locations_list[i].xCenter, area_locations_list[i].yCenter)
+    }
 }
 
 function ticTacToeBoard(){
@@ -127,42 +122,49 @@ function checkCollision() {
     a8Collide = collidePointRect(mouseX, mouseY, a7.x, a5.y, a8.x, a8.y);
     a9Collide = collidePointRect(mouseX, mouseY, a8.x, a6.y, a9.x, a9.y);
 
-    if(a1Collide){
-        test_circle.display(a1.xCenter, a1.yCenter);
-        return a1Collide;
+    let area_collide_list = [a1Collide, a2Collide, a3Collide, a4Collide, a5Collide, a6Collide, a7Collide, a8Collide, a9Collide];
+
+    for(let i = 0; i <= area_locations_list.length; i++){
+        if(area_collide_list[i]){
+            test_circle.display(area_locations_list[i].xCenter, area_locations_list[i].yCenter);
+        }
     }
-    if(a2Collide){
-        test_circle.display(a2.xCenter, a2.yCenter);
-        return a2Collide;
-    }
-    if(a2Collide){
-        test_circle.display(a3.xCenter, a3.yCenter);
-        return a3Collide;
-    }
-    if(a4Collide){
-        test_circle.display(a4.xCenter, a4.yCenter);
-        return a4Collide;
-    }
-    if(a5Collide){
-        test_circle.display(a5.xCenter, a5.yCenter);
-        return a5Collide;
-    }
-    if(a6Collide){
-        test_circle.display(a6.xCenter, a6.yCenter);
-        return a6Collide;
-    }
-    if(a7Collide){
-        test_circle.display(a7.xCenter, a7.yCenter);
-        return a7Collide;
-    }
-    if(a8Collide){
-        test_circle.display(a8.xCenter, a8.yCenter);
-        return a8Collide;
-    }
-    if(a9Collide){
-        test_circle.display(a9.xCenter, a9.yCenter);
-        return a9Collide;
-    }
+    // if(a1Collide){
+    //     test_circle.display(a1.xCenter, a1.yCenter);
+    //     return a1Collide;
+    // }
+    // if(a2Collide){
+    //     test_circle.display(a2.xCenter, a2.yCenter);
+    //     return a2Collide;
+    // }
+    // if(a2Collide){
+    //     test_circle.display(a3.xCenter, a3.yCenter);
+    //     return a3Collide;
+    // }
+    // if(a4Collide){
+    //     test_circle.display(a4.xCenter, a4.yCenter);
+    //     return a4Collide;
+    // }
+    // if(a5Collide){
+    //     test_circle.display(a5.xCenter, a5.yCenter);
+    //     return a5Collide;
+    // }
+    // if(a6Collide){
+    //     test_circle.display(a6.xCenter, a6.yCenter);
+    //     return a6Collide;
+    // }
+    // if(a7Collide){
+    //     test_circle.display(a7.xCenter, a7.yCenter);
+    //     return a7Collide;
+    // }
+    // if(a8Collide){
+    //     test_circle.display(a8.xCenter, a8.yCenter);
+    //     return a8Collide;
+    // }
+    // if(a9Collide){
+    //     test_circle.display(a9.xCenter, a9.yCenter);
+    //     return a9Collide;
+    // }
 }
 
 function mousePressed(){
