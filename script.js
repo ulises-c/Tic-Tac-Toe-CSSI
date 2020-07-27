@@ -1,5 +1,5 @@
 let area1, area2, area3, area4, area5, area6, area7, area8, area9;
-let area1Collision = false;
+let a1Collide = false;
 
 function setup(){
     createCanvas(400, 400);
@@ -19,7 +19,9 @@ function areaLocations(){
     area2 = {
         // top middle
         x: width * 2/3,
-        y: height * 1/3
+        y: height * 1/3,
+        xCenter: width * 2/6,
+        yCenter: height * 1/6
     };
     area3 = {
         // top right
@@ -76,19 +78,22 @@ function ticTacToeBoard(){
 }
 
 function checkCollision() {
-    area1Collision = collidePointRect(mouseX, mouseY, 0, 0, area1.x, area1.y);
+    a1Collide = collidePointRect(mouseX, mouseY, 0, 0, area1.x, area1.y);
+    a2Collide = collidePointRect(mouseX, mouseY, area1.x, 0, area2.x, area1.y);
     // console.log("Mouse pressed: ", mousePressed);
-    if(area1Collision){
-        test_circle.display();
-        return area1Collision;
+    if(a1Collide){
+        // test_circle.display(area1.xCenter, area1.yCenter);
+        return a1Collide;
     };
+    if(a2Collide){
+        test_circle.display(area2.xCenter, area2.yCenter);
+    }
 }
 
 function mousePressed(){
-    if (area1Collision){
-        console.log("Area 1 collision: ", area1Collision);
+    if (a1Collide){
+        // console.log("Area 1 collision: ", a1Collide);
         test_cross.display();
-        console.log(test_cross);
         // if (alreadyFilled){
         //     return
         // }
@@ -127,9 +132,9 @@ class Circle {
         this.radius = 50;
         this.color = "blue";
     }
-    display(){
+    display(xLocation, yLocation){
         stroke(this.color);
         noFill();
-        ellipse(this.x, this.y, this.radius);
+        ellipse(xLocation, yLocation, this.radius);
     }
 }
