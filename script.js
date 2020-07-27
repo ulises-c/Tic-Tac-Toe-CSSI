@@ -1,15 +1,15 @@
-let a_loc, a_col;
+let areaLocation, areaCollision;
 
 function setup(){
     createCanvas(400, 400);
     areaLocations();
-    test_circle = new Circle;
-    test_cross = new Cross;
-    xImage = loadImage("https://i.imgur.com/a_loc[1]GcPMe.png");
+    testCircle = new Circle;
+    testCross = new Cross;
+    // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
 }
 
 function areaLocations(){
-    a_loc = [
+    areaLocation = [
         {
             // top left
             x: width * 1/3,
@@ -79,16 +79,16 @@ function areaLocations(){
 function draw(){
     background(200);
     ticTacToeBoard();
-    // test_circle.display();
-    // test_cross.display();
-    // image(xImage, 100, 100);
+    // testCircle.display();
+    // testCross.display();
+    // image(crossImage, 100, 100);
     drawLocations();
     checkCollision();
 }
 
 function drawLocations(){
-    for(let i = 0; i < a_loc.length; i++){
-        text(i, a_loc[i].xCenter, a_loc[i].yCenter)
+    for(let i = 0; i < areaLocation.length; i++){
+        text(i, areaLocation[i].xCenter, areaLocation[i].yCenter)
     }
 }
 
@@ -102,40 +102,40 @@ function ticTacToeBoard(){
 }
 
 function checkCollision() {
-    a_col = [
-    collidePointRect(mouseX, mouseY, 0, 0, a_loc[0].x, a_loc[0].y),
-    collidePointRect(mouseX, mouseY, a_loc[0].x, 0, a_loc[1].x, a_loc[1].y),
-    collidePointRect(mouseX, mouseY, a_loc[1].x, 0, a_loc[2].x, a_loc[2].y),
-    collidePointRect(mouseX, mouseY, 0, a_loc[0].y, a_loc[3].x, a_loc[3].y),
-    collidePointRect(mouseX, mouseY, a_loc[3].x, a_loc[1].y, a_loc[4].x, a_loc[4].y),
-    collidePointRect(mouseX, mouseY, a_loc[4].x, a_loc[2].y, a_loc[5].x, a_loc[5].y),
-    collidePointRect(mouseX, mouseY, 0, a_loc[3].y, a_loc[6].x, a_loc[6].y),
-    collidePointRect(mouseX, mouseY, a_loc[6].x, a_loc[4].y, a_loc[7].x, a_loc[7].y),
-    collidePointRect(mouseX, mouseY, a_loc[7].x, a_loc[5].y, a_loc[8].x, a_loc[8].y)
+    areaCollision = [
+    collidePointRect(mouseX, mouseY, 0, 0, areaLocation[0].x, areaLocation[0].y),
+    collidePointRect(mouseX, mouseY, areaLocation[0].x, 0, areaLocation[1].x, areaLocation[1].y),
+    collidePointRect(mouseX, mouseY, areaLocation[1].x, 0, areaLocation[2].x, areaLocation[2].y),
+    collidePointRect(mouseX, mouseY, 0, areaLocation[0].y, areaLocation[3].x, areaLocation[3].y),
+    collidePointRect(mouseX, mouseY, areaLocation[3].x, areaLocation[1].y, areaLocation[4].x, areaLocation[4].y),
+    collidePointRect(mouseX, mouseY, areaLocation[4].x, areaLocation[2].y, areaLocation[5].x, areaLocation[5].y),
+    collidePointRect(mouseX, mouseY, 0, areaLocation[3].y, areaLocation[6].x, areaLocation[6].y),
+    collidePointRect(mouseX, mouseY, areaLocation[6].x, areaLocation[4].y, areaLocation[7].x, areaLocation[7].y),
+    collidePointRect(mouseX, mouseY, areaLocation[7].x, areaLocation[5].y, areaLocation[8].x, areaLocation[8].y)
     ];
 
-    for(let i = 0; i < a_loc.length; i++){
-        if(a_col[i]){
-            test_circle.display(a_loc[i].xCenter, a_loc[i].yCenter);
-            return a_col[i];
+    for(let i = 0; i < areaLocation.length; i++){
+        if(areaCollision[i]){
+            testCircle.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            return areaCollision[i];
         }
     }
 }
 
 function mousePressed(){
-    // console.log(a_col)
-    for(let j = 0; j < a_col.length; j++){
-        if(a_col[j]){
-            console.log("Area", j, "collision: ", a_col[j]);
-            test_cross.display();
+    // console.log(areaCollision)
+    for(let j = 0; j < areaCollision.length; j++){
+        if(areaCollision[j]){
+            console.log("Area", j, "collision: ", areaCollision[j]);
+            testCross.display();
         }
     }
 }
 
 class Cross {
     constructor(){
-        this.x = a_loc[0].xCenter;
-        this.y = a_loc[0].yCenter;
+        this.x = areaLocation[0].xCenter;
+        this.y = areaLocation[0].yCenter;
         this.w = 50;
         this.h = 10;
         this.color = "red";
@@ -148,7 +148,7 @@ class Cross {
         // rotate(45);
         rect(this.x, this.y, this.w, this.h);
         rect(this.x, this.y, this.h, this.w);
-        // image(xImage, this.x, this.y);
+        // image(crossImage, this.x, this.y);
     }
 }
 
