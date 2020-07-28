@@ -1,12 +1,17 @@
 let areaLocation, areaCollision;
 let boxWidth, boxHeight;
-let testVar = false;
+let testBool = false;
+let boardArray = [
+    ["empty", "empty", "empty"],
+    ["empty", "empty", "empty"],
+    ["empty", "empty", "empty"],    
+];
 
 function setup(){
     createCanvas(400, 400);
     areaLocations();
-    testCircle = new Circle;
-    testCross = new Cross;
+    aCircle = new Circle;
+    aCross = new Cross;
     boxWidth = width * 1/3;
     boxHeight = height * 1/3;
     // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
@@ -15,11 +20,29 @@ function setup(){
 function draw(){
     background(200);
     ticTacToeBoard();
-    // testCircle.display();
-    // testCross.display();
     // image(crossImage, 100, 100);
     writeNumbers();
     checkCollision();
+    multiDimensionArrayTest();
+    if(testBool) aCircle.display(mouseX, mouseY);
+    else if(!testBool) aCross.display(mouseX, mouseY);
+}
+
+function multiDimensionArrayTest(){
+    if(mouseIsPressed){
+        for(let a = 0; a < boardArray.length; a++){
+            console.log('---------------')
+            for(let b = 0; b < boardArray[a].length; b++){
+                // console.log(`Row ${a}, column ${b} is: "${boardArray[a][b]}"`);
+                if(boardArray[a][b] == "empty"){
+                    testArray = ["X", "O"]
+                    randTest = random(testArray)
+                    boardArray[a][b] = randTest;
+                }
+            }
+        }
+        console.log(boardArray);
+    }
 }
 
 function areaLocations(){
@@ -121,11 +144,11 @@ function checkCollision(){
 
     for(let i = 0; i < areaLocation.length; i++){
         if(areaCollision[i]){
-            if(testVar){
-                testCircle.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            if(testBool){
+                aCircle.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
             }
-            else if(!testVar){
-                testCross.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            else if(!testBool){
+                aCross.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
             }
             return areaCollision[i];
         }
@@ -137,11 +160,11 @@ function mousePressed(){
     for(let j = 0; j < areaCollision.length; j++){
         if(areaCollision[j]){
             console.log("Area", j, "collision: ", areaCollision[j]);
-            testCross.display(areaLocation[j].xCenter, areaLocation[j].yCenter);
+            aCross.display(areaLocation[j].xCenter, areaLocation[j].yCenter);
         }
     }
-    if(testVar) testVar = false;
-    else if(!testVar) testVar= true;
+    if(testBool) testBool = false;
+    else if(!testBool) testBool= true;
 }
 
 class Cross {
