@@ -1,5 +1,6 @@
 let areaLocation, areaCollision;
 let boxWidth, boxHeight;
+let testVar = false;
 
 function setup(){
     createCanvas(400, 400);
@@ -120,7 +121,12 @@ function checkCollision(){
 
     for(let i = 0; i < areaLocation.length; i++){
         if(areaCollision[i]){
-            testCircle.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            if(testVar){
+                testCircle.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            }
+            else if(!testVar){
+                testCross.display(areaLocation[i].xCenter, areaLocation[i].yCenter);
+            }
             return areaCollision[i];
         }
     }
@@ -131,9 +137,11 @@ function mousePressed(){
     for(let j = 0; j < areaCollision.length; j++){
         if(areaCollision[j]){
             console.log("Area", j, "collision: ", areaCollision[j]);
-            testCross.display();
+            testCross.display(areaLocation[j].xCenter, areaLocation[j].yCenter);
         }
     }
+    if(testVar) testVar = false;
+    else if(!testVar) testVar= true;
 }
 
 class Cross {
@@ -144,14 +152,14 @@ class Cross {
         this.h = 10;
         this.color = "red";
     }
-    display(){
+    display(xLocation, yLocation){
         noStroke();
         fill(this.color);
         rectMode(CENTER);
         angleMode(DEGREES);
         // rotate(45);
-        rect(this.x, this.y, this.w, this.h);
-        rect(this.x, this.y, this.h, this.w);
+        rect(xLocation, yLocation, this.w, this.h);
+        rect(xLocation, yLocation, this.h, this.w);
         // image(crossImage, this.x, this.y);
     }
 }
