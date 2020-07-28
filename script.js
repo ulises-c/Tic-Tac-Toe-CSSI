@@ -12,6 +12,16 @@ function setup(){
     // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
 }
 
+function draw(){
+    background(200);
+    ticTacToeBoard();
+    // testCircle.display();
+    // testCross.display();
+    // image(crossImage, 100, 100);
+    writeNumbers();
+    checkCollision();
+}
+
 function areaLocations(){
     areaLocation = [
         {
@@ -79,18 +89,8 @@ function areaLocations(){
         }
     ];
 }
-  
-function draw(){
-    background(200);
-    ticTacToeBoard();
-    // testCircle.display();
-    // testCross.display();
-    // image(crossImage, 100, 100);
-    drawLocations();
-    checkCollision();
-}
 
-function drawLocations(){
+function writeNumbers(){
     for(let i = 0; i < areaLocation.length; i++){
         text(i, areaLocation[i].xCenter, areaLocation[i].yCenter)
     }
