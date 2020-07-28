@@ -1,10 +1,13 @@
 let areaLocation, areaCollision;
+let boxWidth, boxHeight;
 
 function setup(){
     createCanvas(400, 400);
     areaLocations();
     testCircle = new Circle;
     testCross = new Cross;
+    boxWidth = width * 1/3;
+    boxHeight = height * 1/3;
     // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
 }
 
@@ -101,17 +104,18 @@ function ticTacToeBoard(){
     horizontalLine2 = line(0, height * 2/3, width, height * 2/3);
 }
 
-function checkCollision() {
+function checkCollision(){
+    // collidePointRect(pointX, pointY, x, y, width, height)
     areaCollision = [
-    collidePointRect(mouseX, mouseY, 0, 0, areaLocation[0].x, areaLocation[0].y),
-    collidePointRect(mouseX, mouseY, areaLocation[0].x, 0, areaLocation[1].x, areaLocation[1].y),
-    collidePointRect(mouseX, mouseY, areaLocation[1].x, 0, areaLocation[2].x, areaLocation[2].y),
-    collidePointRect(mouseX, mouseY, 0, areaLocation[0].y, areaLocation[3].x, areaLocation[3].y),
-    collidePointRect(mouseX, mouseY, areaLocation[3].x, areaLocation[1].y, areaLocation[4].x, areaLocation[4].y),
-    collidePointRect(mouseX, mouseY, areaLocation[4].x, areaLocation[2].y, areaLocation[5].x, areaLocation[5].y),
-    collidePointRect(mouseX, mouseY, 0, areaLocation[3].y, areaLocation[6].x, areaLocation[6].y),
-    collidePointRect(mouseX, mouseY, areaLocation[6].x, areaLocation[4].y, areaLocation[7].x, areaLocation[7].y),
-    collidePointRect(mouseX, mouseY, areaLocation[7].x, areaLocation[5].y, areaLocation[8].x, areaLocation[8].y)
+    collidePointRect(mouseX, mouseY, 0, 0, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[0].x, 0, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[1].x, 0, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, 0, areaLocation[0].y, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[3].x, areaLocation[1].y, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[4].x, areaLocation[2].y, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, 0, areaLocation[3].y, areaLocation[6].x, areaLocation[6].y, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[6].x, areaLocation[4].y, boxWidth, boxHeight),
+    collidePointRect(mouseX, mouseY, areaLocation[7].x, areaLocation[5].y, boxWidth, boxHeight)
     ];
 
     for(let i = 0; i < areaLocation.length; i++){
