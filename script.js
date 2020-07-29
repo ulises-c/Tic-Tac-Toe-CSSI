@@ -198,6 +198,7 @@ function mousePressed(){
     console.log("Move #" + moves + " =", checkCollision());
     console.log(boardArray);
     moves++;
+    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain "empty"
     for(let i = 0; i < boardArray.length; i++){
         if(moves > 10 && !boardArray[i].includes("empty")) setup();
     }
