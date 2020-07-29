@@ -47,6 +47,7 @@ function boardPopulate(){
 function quadInformation(){
     // array that stores quadrant coordinates
     quadrantData = [
+        // top row
         [
             {
                 // top left
@@ -71,6 +72,7 @@ function quadInformation(){
                 yCenter: height * 1/6,
             }
         ],
+        // middle row
         [
             {
                 // middle left
@@ -94,6 +96,7 @@ function quadInformation(){
                 yCenter: height * 3/6,
             }
         ],
+        // bottom row
         [
             {
                 // bottom left
