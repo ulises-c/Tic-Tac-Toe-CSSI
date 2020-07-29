@@ -1,11 +1,7 @@
 let areaLocation, areaCollision;
 let boxWidth, boxHeight;
 let testBool = false;
-let boardArray = [
-    ["empty", "empty", "empty"],
-    ["empty", "empty", "empty"],
-    ["empty", "empty", "empty"]    
-];
+let boardArray = [];
 
 function setup(){
     createCanvas(800, 800);
@@ -14,6 +10,11 @@ function setup(){
     aCross = new Cross();
     boxWidth = width * 1/3;
     boxHeight = height * 1/3;
+    boardArray = [
+        ["empty", "empty", "empty"],
+        ["empty", "empty", "empty"],
+        ["empty", "empty", "empty"]
+    ]
     // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
     // image(crossImage, 100, 100, 100, 100);
 }
