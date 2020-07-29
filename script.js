@@ -8,7 +8,7 @@ let boardArray = [
 ];
 
 function setup(){
-    createCanvas(400, 400);
+    createCanvas(800, 800);
     areaLocations();
     aCircle = new Circle();
     aCross = new Cross();
@@ -167,21 +167,24 @@ function checkCollision(){
 
     for(let i = 0; i < areaLocation.length; i++){
         for(let j = 0; j < areaLocation[i].length; j++){
-            // the following displays if collision is true in the quadrant
+            // the following updates the board
+            // if collision is true in the quadrant
+            // & if mouse is clicked
+            // & if the board is empty in the quadrant
             if(areaCollision[i][j] && mouseIsPressed && boardArray[i][j] == "empty"){
                 // the following updates boardArray
-                    if(testBool){
-                        aCircle.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
-                            boardArray[i][j] = "cross";
-                        // returning cross because previous click was a cross
-                        // return "cross";
-                    }
-                    else if(!testBool){
-                        aCross.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
-                            boardArray[i][j] = "circle"
-                        // returning circle because previous click was a circle
-                        // return "circle";
-                    }
+                if(testBool){
+                    aCircle.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
+                        boardArray[i][j] = "cross";
+                    // returning cross because previous click was a cross
+                    return "cross";
+                }
+                else if(!testBool){
+                    aCross.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
+                        boardArray[i][j] = "circle"
+                    // returning circle because previous click was a circle
+                    return "circle";
+                }
             } 
         }
     }
@@ -198,8 +201,8 @@ class Cross {
     constructor(){
         this.x = areaLocation[0].xCenter;
         this.y = areaLocation[0].yCenter;
-        this.w = 50;
-        this.h = 10;
+        this.w = 100;
+        this.h = 20;
         this.color = "red";
     }
     display(xLocation, yLocation){
@@ -218,12 +221,13 @@ class Circle {
     constructor(){
         this.x = 200;
         this.y = 50;
-        this.radius = 50;
+        this.radius = 100;
         this.color = "blue";
     }
     display(xLocation, yLocation){
         stroke(this.color);
-        noFill();
+        // noFill();
+        fill(this.color);
         ellipse(xLocation, yLocation, this.radius);
     }
 }
