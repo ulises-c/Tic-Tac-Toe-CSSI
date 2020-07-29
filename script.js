@@ -167,25 +167,22 @@ function checkCollision(){
 
     for(let i = 0; i < areaLocation.length; i++){
         for(let j = 0; j < areaLocation[i].length; j++){
-            if(areaCollision[i][j]){
-                // the following displays if collision is true in the quadrant
-                if(testBool){
-                    aCircle.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
-                    if(mousePressed){
-                        boardArray[i][j] = "circle";
+            // the following displays if collision is true in the quadrant
+            if(areaCollision[i][j] && mouseIsPressed && boardArray[i][j] == "empty"){
+                // the following updates boardArray
+                    if(testBool){
+                        aCircle.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
+                            boardArray[i][j] = "cross";
+                        // returning cross because previous click was a cross
+                        // return "cross";
                     }
-                    // returning cross because previous click was a cross
-                    return "cross";
-                }
-                else if(!testBool){
-                    aCross.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
-                    if(mousePressed){
-                        boardArray[i][j] = "cross"
+                    else if(!testBool){
+                        aCross.display(areaLocation[i][j].xCenter, areaLocation[i][j].yCenter);
+                            boardArray[i][j] = "circle"
+                        // returning circle because previous click was a circle
+                        // return "circle";
                     }
-                    // returning circle because previous click was a circle
-                    return "circle";
-                }
-            }
+            } 
         }
     }
 }
