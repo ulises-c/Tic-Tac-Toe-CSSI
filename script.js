@@ -1,11 +1,11 @@
-let quadrantInfo, areaCollision;
+let quadrantData, areaCollision;
 let boxWidth, boxHeight;
 let testBool = false;
 let boardArray = [];
 
 function setup(){
     createCanvas(800, 800);
-    quadrantInfos();
+    quadInformation();
     aCircle = new Circle();
     aCross = new Cross();
     boxWidth = width * 1/3;
@@ -36,7 +36,7 @@ function drawTest(){
     // rotate(angleRotation);
     // // translate(width * 1/10 + width * 1/6, height * 1/10 - height * 7/17);
     // // rotate(45);
-    // anotherCross.display(quadrantInfo[1].xCenter, quadrantInfo[1].yCenter);
+    // anotherCross.display(quadrantData[1].xCenter, quadrantData[1].yCenter);
 }
 
 function boardPopulate(){
@@ -44,18 +44,18 @@ function boardPopulate(){
     for(let i = 0; i < boardArray.length; i++){
         for(let j = 0; j < boardArray[i].length; j++){
             if(boardArray[i][j] == "circle"){
-                aCircle.display(quadrantInfo[i][j].xCenter, quadrantInfo[i][j].yCenter);
+                aCircle.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
             }
             else if (boardArray[i][j] == "cross"){
-                aCross.display(quadrantInfo[i][j].xCenter, quadrantInfo[i][j].yCenter);
+                aCross.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
             }
         }
     }
 }
 
-function quadrantInfos(){
+function quadInformation(){
     // array that stores quadrant coordinates
-    quadrantInfo = [
+    quadrantData = [
         [
             {
                 // top left
@@ -63,7 +63,7 @@ function quadrantInfos(){
                 y: height * 1/3,
                 xCenter: width * 1/6,
                 yCenter: height * 1/6,
-                shape: ""
+
             },
             {
                 // top middle
@@ -71,7 +71,6 @@ function quadrantInfos(){
                 y: height * 1/3,
                 xCenter: width * 3/6,
                 yCenter: height * 1/6,
-                shape: ""
             },
             {
                 // top right
@@ -79,7 +78,6 @@ function quadrantInfos(){
                 y: height * 1/3,
                 xCenter: width * 5/6,
                 yCenter: height * 1/6,
-                shape: ""
             }
         ],
         [
@@ -89,7 +87,6 @@ function quadrantInfos(){
                 y: height * 2/3,
                 xCenter: width * 1/6,
                 yCenter: height * 3/6,
-                shape: ""
             },
             {
                 // center
@@ -97,7 +94,6 @@ function quadrantInfos(){
                 y: height * 2/3,
                 xCenter: width * 3/6,
                 yCenter: height * 3/6,
-                shape: ""
             },
             {
                 // middle right
@@ -105,7 +101,6 @@ function quadrantInfos(){
                 y: height * 2/3,
                 xCenter: width * 5/6,
                 yCenter: height * 3/6,
-                shape: ""
             }
         ],
         [
@@ -115,7 +110,6 @@ function quadrantInfos(){
                 y: height,
                 xCenter: width * 1/6,
                 yCenter: height * 5/6,
-                shape: ""
             },
             {
                 // bottom middle
@@ -123,7 +117,6 @@ function quadrantInfos(){
                 y: height,
                 xCenter: width * 3/6,
                 yCenter: height * 5/6,
-                shape: ""
             },
             {
                 // bottom right
@@ -131,7 +124,6 @@ function quadrantInfos(){
                 y: height,
                 xCenter: width * 5/6,
                 yCenter: height * 5/6,
-                shape: ""
             }
         ]
     ];
@@ -139,9 +131,9 @@ function quadrantInfos(){
 
 function writeNumbers(){
     // writes numbers within quadrants
-    for(let i = 0; i < quadrantInfo.length; i++){
-        for(let j = 0; j< quadrantInfo[i].length; j++){
-            text(`${i}, ${j}`, quadrantInfo[i][j].xCenter, quadrantInfo[i][j].yCenter)
+    for(let i = 0; i < quadrantData.length; i++){
+        for(let j = 0; j< quadrantData[i].length; j++){
+            text(`${i}, ${j}`, quadrantData[i][j].xCenter, quadrantData[i][j].yCenter)
         }
     }
 }
@@ -164,25 +156,25 @@ function checkCollision(){
         // Row 0
         [
             collidePointRect(mouseX, mouseY, 0, 0, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[0][0].x, 0, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[0][1].x, 0, boxWidth, boxHeight)
+            collidePointRect(mouseX, mouseY, quadrantData[0][0].x, 0, boxWidth, boxHeight),
+            collidePointRect(mouseX, mouseY, quadrantData[0][1].x, 0, boxWidth, boxHeight)
         ],
         // Row 1
         [
-            collidePointRect(mouseX, mouseY, 0, quadrantInfo[0][0].y, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[1][0].x, quadrantInfo[0][0].y, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[1][1].x, quadrantInfo[0][2].y, boxWidth, boxHeight)
+            collidePointRect(mouseX, mouseY, 0, quadrantData[0][0].y, boxWidth, boxHeight),
+            collidePointRect(mouseX, mouseY, quadrantData[1][0].x, quadrantData[0][0].y, boxWidth, boxHeight),
+            collidePointRect(mouseX, mouseY, quadrantData[1][1].x, quadrantData[0][2].y, boxWidth, boxHeight)
         ],
         // Row 2
         [
-            collidePointRect(mouseX, mouseY, 0, quadrantInfo[1][0].y, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[2][0].x, quadrantInfo[1][1].y, boxWidth, boxHeight),
-            collidePointRect(mouseX, mouseY, quadrantInfo[2][1].x, quadrantInfo[1][2].y, boxWidth, boxHeight)
+            collidePointRect(mouseX, mouseY, 0, quadrantData[1][0].y, boxWidth, boxHeight),
+            collidePointRect(mouseX, mouseY, quadrantData[2][0].x, quadrantData[1][1].y, boxWidth, boxHeight),
+            collidePointRect(mouseX, mouseY, quadrantData[2][1].x, quadrantData[1][2].y, boxWidth, boxHeight)
         ]
     ];
 
-    for(let i = 0; i < quadrantInfo.length; i++){
-        for(let j = 0; j < quadrantInfo[i].length; j++){
+    for(let i = 0; i < quadrantData.length; i++){
+        for(let j = 0; j < quadrantData[i].length; j++){
             // the following updates the board
             // if collision is true in the quadrant
             // & if mouse is clicked
@@ -190,14 +182,16 @@ function checkCollision(){
             if(areaCollision[i][j] && mouseIsPressed && boardArray[i][j] == "empty"){
                 // the following updates boardArray
                 if(testBool){
-                    aCircle.display(quadrantInfo[i][j].xCenter, quadrantInfo[i][j].yCenter);
+                    aCircle.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
                         boardArray[i][j] = "cross";
+                        quadrantData[i][j].shape = "cross"
                     // returning cross because previous click was a cross
                     return "cross";
                 }
                 else if(!testBool){
-                    aCross.display(quadrantInfo[i][j].xCenter, quadrantInfo[i][j].yCenter);
+                    aCross.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
                         boardArray[i][j] = "circle"
+                        quadrantData[i][j].shape = "circle"
                     // returning circle because previous click was a circle
                     return "circle";
                 }
