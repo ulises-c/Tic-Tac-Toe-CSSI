@@ -10,6 +10,7 @@ function setup(){
     boxWidth = width * 1/3;
     boxHeight = height * 1/3;
     moves = 1;
+    textSize(20);
     boardArray = [
         ["empty", "empty", "empty"],
         ["empty", "empty", "empty"],
@@ -31,7 +32,7 @@ function draw(){
 }
 
 function boardPopulate(){
-    // 
+    // shows circles and crosses
     for(let i = 0; i < boardArray.length; i++){
         for(let j = 0; j < boardArray[i].length; j++){
             if(boardArray[i][j] == "circle"){
@@ -178,14 +179,12 @@ function checkCollision(){
                 if(testBool){
                     aCircle.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
                         boardArray[i][j] = "cross";
-                        quadrantData[i][j].shape = "cross"
                     // returning cross because previous click was a cross
                     return "cross";
                 }
                 else if(!testBool){
                     aCross.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
                         boardArray[i][j] = "circle"
-                        quadrantData[i][j].shape = "circle"
                     // returning circle because previous click was a circle
                     return "circle";
                 }
@@ -201,10 +200,7 @@ function mousePressed(){
     console.log("Move #" + moves + " =", checkCollision());
     console.log(boardArray);
     moves++;
-    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain "empty"
-    for(let i = 0; i < boardArray.length; i++){
-        if(moves > 10 && !boardArray[i].includes("empty")) setup();
-    }
+    gameOverCheck();
 }
 
 function drawTest(){
@@ -242,5 +238,36 @@ class Circle {
         // noFill();
         fill(this.color);
         ellipse(xLocation, yLocation, this.radius);
+    }
+}
+
+function gameOverCheck() {
+    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain "empty"
+    // checks that the board is full
+    for(let i = 0; i < boardArray.length; i++){
+        // if game is over
+        if(moves > 9 && !boardArray[i].includes("empty")) {
+            gameOverDisplay();
+        }
+    }
+    // Here, we must create a condition where three of the same character are present in a row, column, or diagonal.
+    // I was thinking that an if conditional be implemented for each row and column, multiplied by t
+}
+
+function gameOverDisplay(){
+    noLoop();
+    background(150);
+    stroke("black");
+    noFill();
+    textSize(50)
+    console.log("game has ended")
+    rect(quadrantData[1][1].xCenter, quadrantData[1][1].yCenter, boxWidth, boxHeight);
+    fill("black");
+    text("Game has ended;\nno more moves\navailable!", quadrantData[1][1].xCenter-100, quadrantData[1][1].yCenter);
+    let gameOverBox = collidePointRect(mouseX, mouseY, quadrantData[1][0].x, quadrantData[0][0].y, boxWidth, boxHeight)
+    if(gameOverBox){
+        if(mouseIsPressed)
+            loop();
+            setup();
     }
 }
