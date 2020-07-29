@@ -30,15 +30,6 @@ function draw(){
     // drawTest();
 }
 
-function drawTest(){
-    // anotherCross = new Cross();
-    // angleRotation += 0.5
-    // rotate(angleRotation);
-    // // translate(width * 1/10 + width * 1/6, height * 1/10 - height * 7/17);
-    // // rotate(45);
-    // anotherCross.display(quadrantData[1].xCenter, quadrantData[1].yCenter);
-}
-
 function boardPopulate(){
     // 
     for(let i = 0; i < boardArray.length; i++){
@@ -206,6 +197,15 @@ function mousePressed(){
     else if(!testBool) testBool= true;
     console.log(boardArray);
     console.log(checkCollision());
+}
+
+function drawTest(){
+    // anotherCross = new Cross();
+    // angleRotation += 0.5
+    // rotate(angleRotation);
+    // // translate(width * 1/10 + width * 1/6, height * 1/10 - height * 7/17);
+    // // rotate(45);
+    // anotherCross.display(quadrantData[1].xCenter, quadrantData[1].yCenter);
 }
 
 class Cross {
