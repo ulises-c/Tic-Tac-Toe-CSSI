@@ -1,5 +1,4 @@
-let quadrantData, areaCollision;
-let boxWidth, boxHeight;
+let quadrantData, areaCollision, boxWidth, boxHeight, moves;
 let testBool = false;
 let boardArray = [];
 
@@ -10,6 +9,7 @@ function setup(){
     aCross = new Cross();
     boxWidth = width * 1/3;
     boxHeight = height * 1/3;
+    moves = 1;
     boardArray = [
         ["empty", "empty", "empty"],
         ["empty", "empty", "empty"],
@@ -124,7 +124,7 @@ function writeNumbers(){
     // writes numbers within quadrants
     for(let i = 0; i < quadrantData.length; i++){
         for(let j = 0; j< quadrantData[i].length; j++){
-            text(`${i}, ${j}`, quadrantData[i][j].xCenter, quadrantData[i][j].yCenter)
+            text(`${i}, ${j}`, quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
         }
     }
 }
@@ -195,8 +195,12 @@ function mousePressed(){
     // checks if the mouse has been clicked
     if(testBool) testBool = false;
     else if(!testBool) testBool= true;
+    console.log("Move #" + moves + " =", checkCollision());
     console.log(boardArray);
-    console.log(checkCollision());
+    moves++;
+    for(let i = 0; i < boardArray.length; i++){
+        if(moves > 10 && !boardArray[i].includes("empty")) setup();
+    }
 }
 
 function drawTest(){
