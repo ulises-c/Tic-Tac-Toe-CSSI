@@ -200,8 +200,6 @@ function mousePressed(){
 
 class Cross {
     constructor(){
-        this.x = areaLocation[0].xCenter;
-        this.y = areaLocation[0].yCenter;
         this.w = 100;
         this.h = 20;
         this.color = "red";
@@ -220,8 +218,6 @@ class Cross {
 
 class Circle {
     constructor(){
-        this.x = 200;
-        this.y = 50;
         this.radius = 100;
         this.color = "blue";
     }
