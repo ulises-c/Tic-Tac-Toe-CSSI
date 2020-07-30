@@ -1,4 +1,7 @@
-let quadrantData, areaCollision, boxWidth, boxHeight, moves;
+let quadrantData, areaCollision, boxWidth, boxHeight, moves, winner;
+let cross = "cross"
+let circle = "circle"
+let empty = "empty"
 let testBool = false;
 let boardArray = [];
 
@@ -12,9 +15,9 @@ function setup(){
     moves = 1;
     textSize(20);
     boardArray = [
-        ["empty", "empty", "empty"],
-        ["empty", "empty", "empty"],
-        ["empty", "empty", "empty"]
+        [empty, empty, empty],
+        [empty, empty, empty],
+        [empty, empty, empty]
     ]
     // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
     // image(crossImage, 100, 100, 100, 100);
@@ -23,22 +26,29 @@ function setup(){
 function draw(){
     background(200);
     ticTacToeBoard();
-    writeNumbers();
-    if(testBool) aCircle.display(mouseX, mouseY);
-    else if(!testBool) aCross.display(mouseX, mouseY);
+    // writeNumbers();
+    mouseHoverIcon();
     checkCollision();
     boardPopulate();
     // drawTest();
+}
+
+function mouseHoverIcon(){
+    iconCheck = checkWinner(boardArray)
+    if(moves < 9 &&iconCheck == "Pending"){
+        if(testBool) aCross.display(mouseX, mouseY);
+        else if(!testBool) aCircle.display(mouseX, mouseY);
+    }
 }
 
 function boardPopulate(){
     // shows circles and crosses
     for(let i = 0; i < boardArray.length; i++){
         for(let j = 0; j < boardArray[i].length; j++){
-            if(boardArray[i][j] == "circle"){
+            if(boardArray[i][j] == circle){
                 aCircle.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
             }
-            else if (boardArray[i][j] == "cross"){
+            else if (boardArray[i][j] == cross){
                 aCross.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
             }
         }
@@ -174,19 +184,25 @@ function checkCollision(){
             // if collision is true in the quadrant
             // & if mouse is clicked
             // & if the board is empty in the quadrant
-            if(areaCollision[i][j] && mouseIsPressed && boardArray[i][j] == "empty"){
+            if(areaCollision[i][j] && mouseIsPressed && boardArray[i][j] == empty){
                 // the following updates boardArray
                 if(testBool){
                     aCircle.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
-                        boardArray[i][j] = "cross";
+                        boardArray[i][j] = cross;
+                        moves++;
+                        if(testBool) testBool = false;
+                        else if(!testBool) testBool = true;
                     // returning cross because previous click was a cross
-                    return "cross";
+                    return cross;
                 }
                 else if(!testBool){
                     aCross.display(quadrantData[i][j].xCenter, quadrantData[i][j].yCenter);
-                        boardArray[i][j] = "circle"
+                        boardArray[i][j] = circle
+                        moves++;
+                        if(testBool) testBool = false;
+                        else if(!testBool) testBool = true;
                     // returning circle because previous click was a circle
-                    return "circle";
+                    return circle;
                 }
             } 
         }
@@ -195,12 +211,11 @@ function checkCollision(){
 
 function mousePressed(){
     // checks if the mouse has been clicked
-    if(testBool) testBool = false;
-    else if(!testBool) testBool= true;
     console.log("Move #" + moves + " =", checkCollision());
     console.log(boardArray);
-    moves++;
+    ticTacToeMoves(moves);
     gameOverCheck();
+    if(ticTacToeMoves(moves) !== "Pending") gameOverDisplay();
 }
 
 function drawTest(){
@@ -210,6 +225,73 @@ function drawTest(){
     // // translate(width * 1/10 + width * 1/6, height * 1/10 - height * 7/17);
     // // rotate(45);
     // anotherCross.display(quadrantData[1].xCenter, quadrantData[1].yCenter);
+}
+
+function gameOverCheck() {
+    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain empty
+    // checks that the board is full
+    for(let i = 0; i < boardArray.length; i++){
+        // if game is over
+        if(moves > 9 && !boardArray[i].includes(empty)) {
+            gameOverDisplay();
+        }
+    }
+    // Here, we must create a condition where three of the same character are present in a row, column, or diagonal.
+    // I was thinking that an if conditional be implemented for each row and column, multiplied by t
+}
+
+function gameOverDisplay(){
+    noLoop();
+    console.log("Game has ended")
+    background(150);
+    stroke("black");
+    fill("green");
+    textSize(50)
+    rect(quadrantData[1][1].xCenter, quadrantData[1][1].yCenter, boxWidth, boxHeight);
+    fill("black");
+    text("Game has ended;\nno more moves\navailable!", quadrantData[2][1].xCenter-100, quadrantData[2][1].yCenter-50);
+    text("The winner is", quadrantData[0][1].xCenter-150, quadrantData[0][1].yCenter);
+    text(`\n${winner}`, quadrantData[0][1].xCenter, quadrantData[0][1].yCenter);
+    let gameOverBox = collidePointRect(mouseX, mouseY, quadrantData[1][0].x, quadrantData[0][0].y, boxWidth, boxHeight)
+    if(gameOverBox){
+        if(mouseIsPressed)
+            loop();
+            setup();
+    }
+}
+
+function ticTacToeMoves(moves){
+    if(moves > 9) console.log("Game Over");
+    // else if(moves < 9) console.log("Game Pending");
+    winner = checkWinner(boardArray);
+    console.log(winner);
+    return winner;
+}
+
+function checkWinner(boardArray){
+    let leftDiag = [empty, empty, empty];
+    let rightDiag = [empty, empty, empty];
+    let diagCheck = 2;
+    
+    // algorithm 
+    for(let i = 0; i < 3; i++){
+        // checking columns
+        if(boardArray.every(row => row[i] === cross)) return "X";
+        if(boardArray.every(row => row[i] === cross)) return "O";
+        // checking rows
+        if(boardArray[i].every(item => item === cross)) return "X";
+        if(boardArray[i].every(item => item === circle)) return "O";
+        leftDiag[i] = boardArray[i][i];
+        rightDiag[i] = boardArray[i][diagCheck];
+        diagCheck--;
+    }
+    // console.log("left diagonal:", leftDiag);
+    // console.log("right diagonal:", rightDiag);
+    if(leftDiag.every(item => item === cross)) return "X";
+    if(leftDiag.every(item => item === circle)) return "O";
+    if(rightDiag.every(item => item === cross)) return "X";
+    if(rightDiag.every(item => item === circle)) return "O";
+    else return "Pending"
 }
 
 class Cross {
@@ -238,36 +320,5 @@ class Circle {
         // noFill();
         fill(this.color);
         ellipse(xLocation, yLocation, this.radius);
-    }
-}
-
-function gameOverCheck() {
-    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain "empty"
-    // checks that the board is full
-    for(let i = 0; i < boardArray.length; i++){
-        // if game is over
-        if(moves > 9 && !boardArray[i].includes("empty")) {
-            gameOverDisplay();
-        }
-    }
-    // Here, we must create a condition where three of the same character are present in a row, column, or diagonal.
-    // I was thinking that an if conditional be implemented for each row and column, multiplied by t
-}
-
-function gameOverDisplay(){
-    noLoop();
-    background(150);
-    stroke("black");
-    noFill();
-    textSize(50)
-    console.log("game has ended")
-    rect(quadrantData[1][1].xCenter, quadrantData[1][1].yCenter, boxWidth, boxHeight);
-    fill("black");
-    text("Game has ended;\nno more moves\navailable!", quadrantData[1][1].xCenter-100, quadrantData[1][1].yCenter);
-    let gameOverBox = collidePointRect(mouseX, mouseY, quadrantData[1][0].x, quadrantData[0][0].y, boxWidth, boxHeight)
-    if(gameOverBox){
-        if(mouseIsPressed)
-            loop();
-            setup();
     }
 }
