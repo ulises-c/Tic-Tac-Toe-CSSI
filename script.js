@@ -19,8 +19,6 @@ function setup(){
         [empty, empty, empty],
         [empty, empty, empty]
     ]
-    // crossImage = loadImage("https://i.imgur.com/a2GcPMe.png");
-    // image(crossImage, 100, 100, 100, 100);
 }
 
 function draw(){
@@ -276,21 +274,21 @@ function checkWinner(boardArray){
     // algorithm 
     for(let i = 0; i < 3; i++){
         // checking columns
-        if(boardArray.every(row => row[i] === cross)) return "X";
-        if(boardArray.every(row => row[i] === cross)) return "O";
+        if(boardArray.every(row => row[i] === cross)) return cross;
+        if(boardArray.every(row => row[i] === cross)) return circle;
         // checking rows
-        if(boardArray[i].every(item => item === cross)) return "X";
-        if(boardArray[i].every(item => item === circle)) return "O";
+        if(boardArray[i].every(item => item === cross)) return cross;
+        if(boardArray[i].every(item => item === circle)) return circle;
         leftDiag[i] = boardArray[i][i];
         rightDiag[i] = boardArray[i][diagCheck];
         diagCheck--;
     }
     // console.log("left diagonal:", leftDiag);
     // console.log("right diagonal:", rightDiag);
-    if(leftDiag.every(item => item === cross)) return "X";
-    if(leftDiag.every(item => item === circle)) return "O";
-    if(rightDiag.every(item => item === cross)) return "X";
-    if(rightDiag.every(item => item === circle)) return "O";
+    if(leftDiag.every(item => item === cross)) return cross;
+    if(leftDiag.every(item => item === circle)) return circle;
+    if(rightDiag.every(item => item === cross)) return cross;
+    if(rightDiag.every(item => item === circle)) return circle;
     else return "Pending"
 }
 
