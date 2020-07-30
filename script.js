@@ -234,8 +234,6 @@ function gameOverCheck() {
             gameOverDisplay();
         }
     }
-    // Here, we must create a condition where three of the same character are present in a row, column, or diagonal.
-    // I was thinking that an if conditional be implemented for each row and column, multiplied by t
 }
 
 function gameOverDisplay(){
