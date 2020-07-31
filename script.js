@@ -259,7 +259,7 @@ function checkWinner(boardArray){
     let diagCheck = 2;
     
     // algorithm 
-    for(let i = 0; i < 3; i++){
+    for(let i = 0; i < boardArray.length; i++){
         // checking columns
         if(boardArray.every(row => row[i] === cross)) return cross;
         if(boardArray.every(row => row[i] === circle)) return circle;
