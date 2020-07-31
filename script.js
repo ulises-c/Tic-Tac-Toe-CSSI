@@ -10,6 +10,7 @@ let boardArray = [];
 function setup(){
     createCanvas(800, 800);
     quadInformation();
+    textAlign(CENTER);
     aCircle = new Circle();
     aCross = new Cross();
     boxWidth = width * 1/3;
@@ -235,8 +236,8 @@ function gameOverDisplay(){
     textSize(50)
     rect(quadrantData[1][1].xCenter, quadrantData[1][1].yCenter, boxWidth, boxHeight);
     fill("black");
-    text("Game has ended;\nno more moves\navailable!", quadrantData[2][1].xCenter-100, quadrantData[2][1].yCenter-50);
-    text("The winner is", quadrantData[0][1].xCenter-150, quadrantData[0][1].yCenter);
+    text("Game has ended;\nno more moves\navailable!", quadrantData[2][1].xCenter, quadrantData[2][1].yCenter-50);
+    text("The winner is", quadrantData[0][1].xCenter, quadrantData[0][1].yCenter);
     text(`\n${winner}`, quadrantData[0][1].xCenter, quadrantData[0][1].yCenter);
     let gameOverBox = collidePointRect(mouseX, mouseY, quadrantData[1][0].x, quadrantData[0][0].y, boxWidth, boxHeight)
     if(gameOverBox){
