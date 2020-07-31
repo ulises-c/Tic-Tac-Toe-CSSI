@@ -262,7 +262,7 @@ function checkWinner(boardArray){
     for(let i = 0; i < 3; i++){
         // checking columns
         if(boardArray.every(row => row[i] === cross)) return cross;
-        if(boardArray.every(row => row[i] === cross)) return circle;
+        if(boardArray.every(row => row[i] === circle)) return circle;
         // checking rows
         if(boardArray[i].every(item => item === cross)) return cross;
         if(boardArray[i].every(item => item === circle)) return circle;
