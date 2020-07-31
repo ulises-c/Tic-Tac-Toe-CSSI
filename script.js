@@ -296,7 +296,6 @@ class Cross {
         rectMode(CENTER);
         rect(xLocation, yLocation, this.w, this.h);
         rect(xLocation, yLocation, this.h, this.w);
-        // image(crossImage, this.x, this.y);
     }
 }
 
