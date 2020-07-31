@@ -266,18 +266,19 @@ function checkWinner(boardArray){
         // checking rows
         if(boardArray[i].every(item => item === cross)) return cross;
         if(boardArray[i].every(item => item === circle)) return circle;
+        // populate diagonal check array
         leftDiag[i] = boardArray[i][i];
         rightDiag[i] = boardArray[i][diagCheck];
         diagCheck--;
     }
-    // console.log("left diagonal:", leftDiag);
-    // console.log("right diagonal:", rightDiag);
+    // checking left diagonal
     if(leftDiag.every(item => item === cross)) return cross;
     if(leftDiag.every(item => item === circle)) return circle;
+    // checking right diagonal
     if(rightDiag.every(item => item === cross)) return cross;
     if(rightDiag.every(item => item === circle)) return circle;
+    // checking for draw
     else{
-        // checks for draw
         for(let i = 0; i < boardArray.length; i++){
             if(moves > 9 && !boardArray[i].includes(empty)) return tie
             else return pending
