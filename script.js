@@ -1,7 +1,9 @@
 let quadrantData, areaCollision, boxWidth, boxHeight, moves, winner;
-let cross = "cross"
-let circle = "circle"
-let empty = "empty"
+let cross = "cross";
+let circle = "circle";
+let empty = "empty";
+let pending = "pending";
+let tie = "draw"
 let testBool = false;
 let boardArray = [];
 
@@ -33,7 +35,7 @@ function draw(){
 
 function mouseHoverIcon(){
     iconCheck = checkWinner(boardArray)
-    if(moves < 9 &&iconCheck == "Pending"){
+    if(moves < 9 &&iconCheck == pending){
         if(testBool) aCross.display(mouseX, mouseY);
         else if(!testBool) aCircle.display(mouseX, mouseY);
     }
@@ -212,8 +214,7 @@ function mousePressed(){
     console.log("Move #" + moves + " =", checkCollision());
     console.log(boardArray);
     ticTacToeMoves(moves);
-    gameOverCheck();
-    if(ticTacToeMoves(moves) !== "Pending") gameOverDisplay();
+    if(ticTacToeMoves(moves) !== pending) gameOverDisplay();
 }
 
 function drawTest(){
@@ -223,17 +224,6 @@ function drawTest(){
     // // translate(width * 1/10 + width * 1/6, height * 1/10 - height * 7/17);
     // // rotate(45);
     // anotherCross.display(quadrantData[1].xCenter, quadrantData[1].yCenter);
-}
-
-function gameOverCheck() {
-    // if boardArray[0] && boardArray[1] && boardArray[2] don't contain empty
-    // checks that the board is full
-    for(let i = 0; i < boardArray.length; i++){
-        // if game is over
-        if(moves > 9 && !boardArray[i].includes(empty)) {
-            gameOverDisplay();
-        }
-    }
 }
 
 function gameOverDisplay(){
@@ -257,10 +247,8 @@ function gameOverDisplay(){
 }
 
 function ticTacToeMoves(moves){
-    if(moves > 9) console.log("Game Over");
-    // else if(moves < 9) console.log("Game Pending");
     winner = checkWinner(boardArray);
-    console.log(winner);
+    if(moves > 9 || winner != pending && winner != tie) console.log("Winner is: " + winner);
     return winner;
 }
 
@@ -287,7 +275,13 @@ function checkWinner(boardArray){
     if(leftDiag.every(item => item === circle)) return circle;
     if(rightDiag.every(item => item === cross)) return cross;
     if(rightDiag.every(item => item === circle)) return circle;
-    else return "Pending"
+    else{
+        // checks for draw
+        for(let i = 0; i < boardArray.length; i++){
+            if(moves > 9 && !boardArray[i].includes(empty)) return tie
+            else return pending
+        }
+    }
 }
 
 class Cross {
