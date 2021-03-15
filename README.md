@@ -3,7 +3,7 @@
  * Cohort 36
 ## Project
 * A tic-tac-toe game for Google's 2020 CSSI
-* Live website : https://uli-oli.github.io/
+* Live website : https://ulises-c.github.io/
 ## Structure
 * Using GitHub Pages to host the game
 * Using RawGit as a CDN to push the source code
