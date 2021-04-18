@@ -1,5 +1,5 @@
 ## Tic-Tac-Toe-CSSI
- * Project for Google's 2020 CSSI
+ * Project for Google's 2020 CSSI - https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute/
  * Cohort 36
 ## Project
 * A tic-tac-toe game for Google's 2020 CSSI
